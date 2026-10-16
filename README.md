@@ -7,8 +7,9 @@ An independent Harding University cafeteria community with a dark interface, sar
 - Harding MyDiningHub menus grouped by station, with date, meal, and location selectors.
 - Server-side menu fetching with a five-minute cache, source links, and retrieval timestamps.
 - Shared dining chat refreshed every three seconds.
-- Persistent food reviews and one-to-five-star ratings stored in Cloudflare D1.
+- Persistent food reviews and 1–27-star ratings (legacy reviews keep their original five-star scale) stored in Cloudflare D1.
 - Responsive layouts and self-chosen display names.
+- Caf occupancy panel with an aggregate feed adapter, stale-data labels, and an explicit disconnected state. A Harding-authorized feed is required for real counts; see [occupancy integration](docs/occupancy.md).
 
 ## Run locally
 
@@ -18,10 +19,11 @@ Requires Node.js 22.13 or newer and pnpm. This repository includes a pnpm lockfi
 pnpm install --frozen-lockfile
 pnpm run build
 node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_rapid_kabuki.sql
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0001_curious_purple_man.sql
 pnpm run dev
 ```
 
-Apply the initial migration only once per local database. Use the local URL printed by the development server. Local data is separate from the hosted database.
+Apply each migration only once per local database. Use the local URL printed by the development server. Local data is separate from the hosted database.
 
 ## Project structure
 

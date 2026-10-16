@@ -1,0 +1,10 @@
+'use client';
+import {useEffect,useState} from 'react';
+import {Users,RefreshCw} from 'lucide-react';
+type Count={status:'not_connected'|'unavailable'|'live'|'stale';count:number|null;kind?:'occupancy'|'estimate';updatedAt?:string;source?:string;method?:string;message?:string};
+export default function CafOccupancy(){
+ const [data,setData]=useState<Count|null>(null),[retry,setRetry]=useState(0);
+ useEffect(()=>{let active=true;async function load(){try{const r=await fetch('/api/occupancy',{cache:'no-store'});if(!r.ok)throw Error();const d=await r.json() as Count;if(active)setData(d)}catch{if(active)setData({status:'unavailable',count:null,message:'The Caf count could not be refreshed.'})}}load();const t=setInterval(load,30000);return()=>{active=false;clearInterval(t)}},[retry]);
+ const stale=data?.status==='stale',hasCount=data?.count!==null&&data?.count!==undefined;
+ return <section className="occupancy-card" aria-label="Caf occupancy"><div className="occupancy-top"><span><Users size={18}/> The Caf, right now</span><button aria-label="Refresh Caf occupancy" onClick={()=>setRetry(r=>r+1)}><RefreshCw size={14}/></button></div><div className="occupancy-value" aria-live="polite">{hasCount?<><strong>{data.count?.toLocaleString()}</strong><span>{stale?'last reported':data.kind==='estimate'?'estimated diners':'people inside'}</span></>:<><strong>—</strong><span>{!data?'Checking count…':data.status==='not_connected'?'Swipe feed not connected':'Count unavailable'}</span></>}</div><p>{hasCount?data.method:data?.message||'Checking the Caf occupancy connection.'}</p>{hasCount&&<small>{stale?'STALE DATA · ':''}{data.source} · Updated {data.updatedAt&&new Date(data.updatedAt).toLocaleTimeString('en-US',{timeZone:'America/Chicago',hour:'numeric',minute:'2-digit'})} CT</small>}<div className="occupancy-note">{hasCount?'Refreshes every 30 seconds.': 'Swipe-ins count arrivals. A current occupancy count also needs departures; entry-only counts must be labeled as estimates.'}</div></section>
+}
