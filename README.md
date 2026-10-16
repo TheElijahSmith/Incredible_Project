@@ -1,4 +1,4 @@
-# Incredible Project — Hard to Swallow
+# Incredible Project — Taste and See
 
 An independent Harding University cafeteria community with a dark interface, sarcastic copy, live chat, food reviews, and official dining menus.
 
