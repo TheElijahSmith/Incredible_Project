@@ -13,7 +13,7 @@ export async function POST(req:Request) {
  if(!parsed.success)return Response.json({error:'Check your name, message, and rating.'},{status:400});
  const p=parsed.data;
  if (!['chat','review'].includes(p.kind)||!['The Caf','Student Center','Bison Cafe'].includes(p.hall)||typeof p.author!=='string'||!p.author.trim()||p.author.length>30||typeof p.body!=='string'||!p.body.trim()||p.body.length>1000) return Response.json({error:'Please add a name and a message (up to 1,000 characters).'},{status:400});
- if(p.kind==='review'&&(!reviewRatingSchema.safeParse(p.rating).success||typeof p.dish!=='string'||!p.dish.trim()||p.dish.length>80)) return Response.json({error:'Choose a dish and a rating from 1 to 27.'},{status:400});
+ if(p.kind==='review'&&(!reviewRatingSchema.safeParse(p.rating).success||typeof p.dish!=='string'||!p.dish.trim()||p.dish.length>80)) return Response.json({error:'Choose a dish and a rating from 0 to 27.'},{status:400});
  const post={id:crypto.randomUUID(),kind:p.kind,hall:p.hall,author:p.author.trim(),body:p.body.trim(),dish:p.kind==='review'?p.dish.trim():'',rating:p.kind==='review'?p.rating:0,ratingScale:27,createdAt:Date.now()};
  await getDb().insert(posts).values(post);return Response.json({post},{status:201});
  } catch {return Response.json({error:'Your post could not be saved. Please try again.'},{status:503});}
