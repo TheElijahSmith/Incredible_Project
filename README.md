@@ -4,7 +4,7 @@ An independent Harding University cafeteria community with a dark interface, sar
 
 ## Features
 
-- Harding MyDiningHub menus grouped by station, with date, meal, and location selectors.
+- Harding MyDiningHub menus grouped by station, with date, meal, and location selectors. Today follows America/Chicago time, rolls over automatically at midnight, refreshes every five minutes, and refreshes when the app resumes. Manually selected dates remain selected until Back to today is pressed.
 - Server-side menu fetching with a five-minute cache, source links, and retrieval timestamps.
 - Shared dining chat refreshed every three seconds.
 - Persistent food reviews and 1–27-star ratings (legacy reviews keep their original five-star scale) stored in Cloudflare D1.
