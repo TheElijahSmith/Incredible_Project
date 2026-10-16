@@ -8,6 +8,7 @@ An independent Harding University cafeteria community with a dark interface, sar
 - Server-side menu fetching with a five-minute cache, source links, and retrieval timestamps.
 - Shared dining chat refreshed every three seconds.
 - Persistent food reviews and 1–27-star ratings (legacy reviews keep their original five-star scale) stored in Cloudflare D1.
+- Review the reviews: signed-in users give food reviews 0–16 stars, with average scores and rating counts. Each account gets one editable rating per review.
 - Responsive layouts and self-chosen display names.
 - Caf occupancy panel with an aggregate feed adapter, stale-data labels, and an explicit disconnected state. A Harding-authorized feed is required for real counts; see [occupancy integration](docs/occupancy.md).
 
@@ -20,6 +21,7 @@ pnpm install --frozen-lockfile
 pnpm run build
 node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_rapid_kabuki.sql
 node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0001_curious_purple_man.sql
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0002_clever_forge.sql
 pnpm run dev
 ```
 
