@@ -10,6 +10,7 @@ An independent Harding University cafeteria community with a dark interface, sar
 - Persistent food reviews and 0–27-star ratings (legacy reviews keep their original five-star scale) stored in Cloudflare D1.
 - Review the reviews: signed-in users give food reviews 0–16 stars, with average scores and rating counts. Each account gets one editable rating per review.
 - Maximum food/review scores use “The Wild Donkey's quench their thirst.”; zero scores use “Weeping and Gnashing of teeth”.
+- Each menu dish has a read-only average slider: 25+ is Beatific, above 4 and below 25 is Aight, and 4 or lower is satanic panic. Aggregates include all food reviews for the matching dish/channel, normalize legacy five-star scores, and refresh every 15 seconds or after a review is posted.
 - Responsive layouts and self-chosen display names.
 - Caf occupancy panel with an aggregate feed adapter, stale-data labels, and an explicit disconnected state. A Harding-authorized feed is required for real counts; see [occupancy integration](docs/occupancy.md).
 
