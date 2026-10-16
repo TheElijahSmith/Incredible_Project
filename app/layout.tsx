@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hard to Swallow | Harding’s Unfiltered Dining Reviews",
+  title: "Taste and See | Harding’s Unfiltered Dining Reviews",
   description: "An independent Harding University dining community: food reviews, live chat, and what to try next.",
   icons: {
     icon: "/favicon.svg",
