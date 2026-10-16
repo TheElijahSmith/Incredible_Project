@@ -1,0 +1,1 @@
+ALTER TABLE `posts` ADD `rating_scale` integer DEFAULT 5 NOT NULL;
